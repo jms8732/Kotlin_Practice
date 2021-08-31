@@ -67,7 +67,12 @@ fun main(args : Array<String>){
         port = 8080
         query(prepareRequest() + " to port $port")
     }
+
+    numbers.also{println("The list elements before adding new one : $it")}
+        .add("four")
+
 }
+
 
 fun getRandomInt() : Int{
     return Random.nextInt(100).also {
