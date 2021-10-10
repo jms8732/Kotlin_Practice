@@ -2,15 +2,53 @@ package `coroutine-pratice`
 
 import kotlinx.coroutines.*
 
+var acquired = 0
 
-fun main(): Unit = runBlocking {
-    withTimeout(1300L) {
-        repeat(1000) { i ->
-            println("I'm sleeping $i....")
-            delay(500L)
+class Resource {
+    init {
+        acquired++
+    }
+
+    fun close() {
+        acquired--
+    }
+}
+
+
+fun main() {
+    runBlocking {
+        repeat(100_000) {
+            launch {
+                val resource = withTimeout(60) {
+                    Resource()
+                }
+                resource.close()
+            }
         }
     }
-    
+
+    println(acquired)
+    /* try {
+         withTimeout(1300L) {
+             repeat(1000) { i ->
+                 println("I'm sleeping $i ...")
+                 delay(500L)
+             }
+         }
+     }catch (e: Exception){
+         //do something
+     }
+
+     val result = withTimeoutOrNull(1300L){
+         repeat(1000){ i->
+             println("I'm sleeping $i ....")
+             delay(500L)
+         }
+         "Done"
+     }
+
+     println("Result is $result")*/
+
 
 /*    //Run non-cancellable block
     val job = launch {
@@ -88,3 +126,4 @@ fun main(): Unit = runBlocking {
     job.cancelAndJoin()
     println("main: Now i can quit.")*/
 }
+
