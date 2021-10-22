@@ -1,17 +1,18 @@
 package `learning-concurrency-kotlin`
 
 import kotlinx.coroutines.*
-import java.lang.UnsupportedOperationException
+import kotlin.UnsupportedOperationException
 
 fun main(args : Array<String>) = runBlocking<Unit>{
     val dispatcher = newSingleThreadContext(name = "ServiceCall")
-    val task = launch(dispatcher) {
-        printCurrentThread()
+    val task = GlobalScope.launch {
+        doSomething()
     }
 
     task.join()
+    println("Complete")
 }
 
-fun printCurrentThread(){
-    println("Running is thread ${Thread.currentThread().name}")
+fun doSomething(){
+    throw UnsupportedOperationException("Can't do")
 }
