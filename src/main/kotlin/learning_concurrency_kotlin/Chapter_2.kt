@@ -1,4 +1,4 @@
-package `learning-concurrency-kotlin`
+package learning_concurrency_kotlin
 
 import kotlinx.coroutines.*
 import kotlin.UnsupportedOperationException

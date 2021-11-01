@@ -1,7 +1,6 @@
-package `learning-concurrency-kotlin`
+package learning_concurrency_kotlin
 
 import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 import kotlin.system.measureTimeMillis
 
 fun main(args: Array<String>): Unit = runBlocking {
